@@ -32,7 +32,6 @@ int main(){
                 break;
             }
         }
-        // cout<<cols[i]<<"********"<<endl;
         if(flag==1){
             cols[i]=1;
         }
@@ -40,17 +39,58 @@ int main(){
             cols[i]=0;
         }
     }
-    int end=0;
+    int end=1;
+    for(int i=0;i<n;i++){
+        flag=1;
+        if(cols[i]==1){
+            flag=0;
+            for(int j=0;j<m;j++){
+                if(rows[j]==1){
+                    flag=1;
+                    break;
+                }
+            }
+        }
+        if(flag==1){
+            end=1;
+        }
+        else{
+            end=0;
+            break;
+        }
+    }
+
     for(int i=0;i<m;i++){
         for(int j=0;j<n;j++){
-            if((a[i][j]==1 && rows[i]!=1 && cols[j]!=1) || (a[i][j]==0 && rows[i]==1 && cols[j]==1)){
-                end=1;
+            if(a[i][j]==1 && rows[i]!=1 && cols[j]!=1){
+                end=0;
                 break;
-
             }
         }
     }
-    if(end==1){
+    int end1=1;
+     for(int i=0;i<m;i++){
+        flag=1;
+        if(rows[i]==1){
+            flag=0;
+            for(int j=0;j<n;j++){
+                if(cols[j]==1){
+                    flag=1;
+                    break;
+                }
+            }
+        }
+        if(flag==1){
+            end1=1;
+        }
+        else{
+            end1=0;
+            break;
+        }
+    }
+
+
+    if(end==0 || end1==0){
         cout<<"NO"<<endl;
     }
     else{
