@@ -2,25 +2,24 @@
 #include<bits/stdc++.h>
 using namespace std;
 int main(){
-    long test;
+    long  long test;
     cin>>test;
-    for(long t=0;t<test;t++){
-        long n;
+    for(long  long t=0;t<test;t++){
+        long  long n;
         cin>>n;
-        long a[n];
-        for(long i=0;i<n;i++){
+        long  long a[n];
+        for(long  long i=0;i<n;i++){
             cin>>a[i];
         }
-        long m;
+        long  long m;
         cin>>m;
-        long b[m];
-        long s=0;
-        for(long i=0;i<m;i++){
+        long  long b[m];
+        long  long s=0;
+        for(long  long i=0;i<m;i++){
             cin>>b[i];
             s+=b[i];
         }
         cout<<a[s%n]<<endl;
-        
-
     }
 }
+
