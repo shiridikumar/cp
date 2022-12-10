@@ -6,77 +6,29 @@ int main(){
     cin>>test;
     for(int tes=0;tes<test;tes++){
         int n;
-        cin >>n;
+        cin>>n;
+        int a[n];
         string s;
         cin>>s;
-        int c=0;
-        for(int i=0;i<s.length();i++){
+        int first=-1;
+        int last=-1;
+        for(int i=0;i<s.size();i++){
             if(s[i]=='1'){
-                c+=1;
-            }
-        }
-        int ind;
-        for(int i=0;i<s.length();i++){
-            if(s[i]=='0'){
-                ind =i;
-                break;
-            }
-        }
-        int ind2=0;
-        for(int i=s.length()-1;i>=0;i--){
-            if(s[i]=='0'){
-                ind2 =i;
-                break;
-            }
-        }
-        int ans=0;
-        // cout<<ind<<ind2<<endl;
-        int temp=ind;
-        int k=0;
-        ans=n;
-        for(int i=temp;i<s.length();i++){
-            if(s[i]=='1'){
-                ans=max(ans,max(2*(i+1),i+1+c-k));
-                k+=1;
+                if(first==-1){
+                    first=i;
+                }
+                last=i;
             }
 
         }
-
-        k=0;
-        // cout<<temp<<endl;
-        for(int i=temp;i>=0;i--){
-            // cout<<ans<<"--------------"<<endl;
-            if(s[i]=='1'){
-                ans=max(ans,max(2*(n-i),n-i+c-k));
-                k+=1;
-            }
-
+        if(first!=-1){
+            last=max(last+1,n-last);
+            first=max(first+1,n-first);
+            cout<<2*max(first,last)<<endl;
         }
-        temp=ind2;
-        k=0;
-          for(int i=temp;i<s.length();i++){
-            if(s[i]=='1'){
-                ans=max(ans,max(2*(i+1),i+1+c-k));
-                k+=1;
-            }
-
+        else{
+            cout<<n<<endl;
         }
-
-        k=0;
-        cout<<temp<<endl;
-        for(int i=temp;i>=0;i--){
-            if(s[i]=='1'){
-                ans=max(ans,max(2*(n-i),n-i+c-k));
-                k+=1;
-            }
-
-        }
-
-
-        cout<<ans<<endl;
-
-
-
 
     }
 }

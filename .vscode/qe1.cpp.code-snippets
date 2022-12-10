@@ -17,7 +17,7 @@
 			"int main(){",
 				"\tint test;",
 				"\tcin>>test;",
-				"\tfor(int i=0;i<test;i++){",
+				"\tfor(int tes=0;tes<test;tes++){",
 				"\t\tint n;",
 				"",
 				"",
