@@ -1,38 +1,48 @@
 #include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
-int solution(int n,int m,int mi,int a[]){
-    sort(a,a+n);
-    int flag=0;
-    int i=0;
-    for(i=mi-1;i<n-mi;i+=mi){
-        if(a[i]-a[i-mi]>m){
-            flag=1;
-            break;
-        }
-    }
-    if(i!=n-1 && flag==0){
-        if(a[n-1]-a[i-mi+1]>m){
-            flag=1;
-        }
-    }
-    if(flag==0){
-        return n/mi;
-    }
-    else{
-        return -1;
-    }
-
-}
 int main(){
-    int n,m,mi;
+    long long n;
     cin>>n;
-    cin>>m;
-    cin>>mi;
-    int a[n];
-    for(int i=0;i<n;i++){
+    long long a[n];
+    for(long long i=0;i<n;i++){
         cin>>a[i];
     }
-    cout<<solution(n,m,mi,a)<<endl;
-
+    long long k;
+    cin>>k;
+    vector<long long> prefix(n,0);
+    long long s=a[0];
+    // cout<<endl;
+    prefix[0]=s;
+    for(long long i=1;i<n;i++){
+        s=(s|a[i]);
+        prefix[i]=s;
+        cout<<prefix[i]<<endl;
+    }
+    // cout<<endl;
+    vector<long long> suffix(n,0);
+    s=a[n-1];
+    suffix[0]=s;
+    vector<long long> final;
+    long long all[n][n];
+    for(long long i=0;i<n;i++){
+        for(long long j=0;j<n;j++){
+            all[i][j]=0;
+            // if(i<=j){
+                if(i!=0){
+                    all[i][j]=prefix[j]-prefix[i-1];
+                    cout<<all[i][j]<<" ";
+                }
+                else{
+                    all[i][j]=prefix[j];
+                }
+            // }
+            final.push_back(all[i][j]);
+        }
+        cout<<endl;
+        // cout<<endl;
+    }
+    sort(final.begin(),final.end());
+    reverse(final.begin(),final.end());
+    cout<<final[k-1]<<endl;
 }

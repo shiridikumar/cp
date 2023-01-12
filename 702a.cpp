@@ -23,6 +23,6 @@ int main(){
             prev=a[i];
         }
     }
-    curr=max(ma,curr)
+    curr=max(ma,curr);
     cout<<curr<<endl;
 }
