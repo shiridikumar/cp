@@ -7,6 +7,7 @@ int main(){
     cin>>s;
     cin>>nb>>ns>>nc;
     cin>>pb>>ps>>pc;
+    
 
 
 }

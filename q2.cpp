@@ -33,7 +33,7 @@ int main(){
     a=a+1;
     int lb=((a+10)/10)*10+1;
     int ub=(b/10)*10;
-    int e1=(a/10)*10
+    int e1=((a/10)*10-1)-a/2;
 
     cout<<lb<<" "<<ub<<endl;
     int middle=(ub-lb)/2;
