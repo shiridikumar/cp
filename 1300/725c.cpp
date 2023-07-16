@@ -19,9 +19,6 @@ int main(){
             lp=lower_bound(it+1,a.end(),l-*it)-a.begin();
             rp=upper_bound(it+1,a.end(),r-*it)-a.begin();
             count+=rp-lp;
-
-            // cout<<*it<<" "<<count<<" "<<lp<<" "<<rp<<endl;
-            // it--;
         }
         cout<<count<<endl;
 

@@ -20,7 +20,7 @@ int main(){
             for(long long k=2*a[i];k<2*n;k+=a[i]){
                 
                 if(vec[k/a[i]]!=-1){
-                    cout<<k<<" --"<<a[i]<<endl;
+                    // cout<<k<<" --"<<a[i]<<endl;
                     if(vec[k/a[i]]+i+1==k){
                         mi=min(a[i],k/a[i]);
                         ma=max(a[i],k/a[i]);
