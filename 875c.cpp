@@ -1,6 +1,25 @@
 #include <iostream>
 #include <bits/stdc++.h>
 using namespace std;
+void dfs(map<pair<int,int>,int > &idx,int source, vector<int> &vis,map<int,vector<int> > &adj ,vector<int> &num){
+    for(int i=0;i<adj[source].size();i++){
+        if(vis[adj[source][i]]==0 && adj[source][i]!=1){
+            vis[adj[source][i]]=idx[make_pair(source,adj[source][i])];
+            // if(source==1){
+            //     cout<<adj[source][i]<<" --> "<<vis[adj[source][i]]<<" "<<vis[source]<<endl;
+            // }
+            if(vis[source]<vis[adj[source][i]]){
+                num[adj[source][i]]=num[source];
+            }
+            else{
+                 num[adj[source][i]]=num[source]+1;
+            }
+            dfs(idx,adj[source][i],vis,adj,num);
+        }
+    }
+
+
+}
 int main()
 {
     int test;
@@ -10,63 +29,30 @@ int main()
         int n;
         cin >> n;
         int e1, e2;
-        vector<pair<int, int>> edges;
+        // vector<pair<int, int>> edges;
+        map<pair<int,int> ,int> idx;
+        map<int,vector<int> > adj;
+        vector<int> vis(n+1,0);
+        vector<int> num(n+1,0);
+        vis[1]=0;
+        num[1]=1;
+
         for (int i = 0; i < n - 1; i++)
         {
             cin >> e1 >> e2;
-            edges.push_back(make_pair(e1, e2));
+            idx[make_pair(e1,e2)]=i+1;
+            idx[make_pair(e2,e1)]=i+1;
+            adj[e1].push_back(e2);
+            adj[e2].push_back(e1);
+            // edges.push_back(make_pair(e1, e2));
         }
-        map<int, int> comp;
-        map<int, int> reads;
-        map<int, int> read;
-        int cm = 2;
-        comp[1] = 1;
-        reads[1] = 1;
-        read[1] = 1;
-
-        for (int i = 0; i < edges.size(); i++)
-        {
-            if (!(read[edges[i].second]))
-            {
-                if (read[edges[i].first])
-                {
-                    if (!(comp[edges[i].second]))
-                    {
-                        comp[edges[i].second] = comp[edges[i].first];
-                        reads[comp[edges[i].second]] = reads[comp[edges[i].first]];
-                    }
-                    else
-                    {
-                        reads[comp[edges[i].second]] +=reads[comp[edges[i].first]];
-                    }
-                    read[edges[i].second] = 1;
-                    // cout<<edges[i].first<<" ****** "<<edges[i].second<<endl;
-                }
-                else
-                {
-                    if (!(comp[edges[i].first]))
-                    {
-                        comp[edges[i].first] = cm;
-                        comp[edges[i].second] = cm;
-                        reads[cm]+=1;
-                        // cout<<cm<<"(((((((((("<<endl;
-                        cm += 1;
-                    }
-                    else{
-                        comp[edges[i].second]=comp[edges[i].first];
-                    }
-                }
-            }
+        // cout<<endl;
+        dfs(idx,1,vis,adj,num);
+        int ma=0;
+        for(int i=1;i<=n;i++){
+            ma=max(ma,num[i]);
         }
-        for (int i = 1; i <= n; i++)
-        {
-            cout << comp[i] << " ";
-        }
-        cout << endl;
-        cout<<"*****"<<endl;
-        for (auto it = reads.begin(); it != reads.end(); it++)
-        {
-            cout << (*it).first << " " << (*it).second << endl;
-        }
+        cout<<ma<<endl;
+       
     }
 }

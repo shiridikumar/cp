@@ -5,12 +5,9 @@ using namespace std;
 void dfs(long long source, vector<long long> &vis, long long *sum, long long k, vector<vector<long long>> &adj)
 {
     vis[source] = 1;
-    // cout<<source<<endl;
     for (long long i = 0; i < adj[source].size(); i++)
     {
-        *sum+=k-1-(adj[source].size()-1)-(adj[adj[source][i]].size()-1);
-        //  cout <<source<<" , "<<adj[source][i]<<" -->  "<< *sum << " " << adj[source].size() - 1 << " " << adj[adj[source][i]].size() - 1 << endl;
-
+        *sum += k - 1 - (adj[source].size() - 1) - (adj[adj[source][i]].size() - 1);
         if (vis[adj[source][i]] == 0)
         {
             dfs(adj[source][i], vis, sum, k, adj);
@@ -46,20 +43,13 @@ int main()
         }
         vector<long long> vis(a + b + 2, 0);
         long long sum = 0;
-
-        // for (auto &it : vec)
-        // {
-        //     cout << it << " ";
-        // }
-        // cout << endl;
         for (long long i = 0; i < vec.size(); i++)
         {
             if (vis[vec[i]] == 0)
             {
                 dfs(vec[i], vis, &sum, k, adj);
-                // cout<<endl;
             }
         }
-        cout<<sum /4<<endl;
+        cout << sum / 4 << endl;
     }
 }
